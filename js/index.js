@@ -4,15 +4,19 @@ var gameMemory=[];
 var tempMemory=[];
 var levelNumber=0;
 var position=0;
+var started=false;
 
 // Press any button to start game
 $(document).on("keypress",function(){
     $("body").removeClass("game-over");
+    if(started===false){
     $("h1").text("Level 1");
     // calling randomgenerator to blink first btn
     if(position==levelNumber){
         randomGenerator();
     }
+    started=true;
+}
 
 });
 
@@ -29,10 +33,14 @@ function randomGenerator(){
 
 // Clcik event listener -> flashing -> checkingSequence
 $(".btn").on("click",function(event){
-   var pressedId=$(this).attr("id"); 
+if(started==true)
+{  var pressedId=$(this).attr("id"); 
+   var audio= new Audio("C:/Users/harsh/HtmlCss_Angela/simon_game/"+pressedId+".mp3");
+   audio.play();
    flash(pressedId);
    tempMemory.push(pressedId);
    checkSequence();
+}
 });
 
 function checkSequence(){
@@ -44,6 +52,8 @@ function checkSequence(){
     else
     {
         gameEnded=1;
+        var audio= new Audio("C:/Users/harsh/HtmlCss_Angela/simon_game/wrong.mp3");
+        audio.play();
         resetGame();
     }
     //if loop does not break then it will proceed to create new Num
@@ -61,6 +71,7 @@ function resetGame()
     gameMemory=[];
     position=0;
     levelNumber=0;
+    started=false;
     $("body").addClass("game-over");
     $("h1").text("Game Over press any key to restart");
 }
