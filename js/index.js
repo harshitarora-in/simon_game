@@ -35,7 +35,7 @@ function randomGenerator(){
 $(".btn").on("click",function(event){
 if(started==true)
 {  var pressedId=$(this).attr("id"); 
-   var audio= new Audio("C:/Users/harsh/HtmlCss_Angela/simon_game/"+pressedId+".mp3");
+   var audio= new Audio("../"+pressedId+".mp3");
    audio.play();
    flash(pressedId);
    tempMemory.push(pressedId);
@@ -52,7 +52,7 @@ function checkSequence(){
     else
     {
         gameEnded=1;
-        var audio= new Audio("C:/Users/harsh/HtmlCss_Angela/simon_game/wrong.mp3");
+        var audio= new Audio("../wrong.mp3");
         audio.play();
         resetGame();
     }
